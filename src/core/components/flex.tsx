@@ -35,9 +35,8 @@ export function Flex({
   children,
 }: Props) {
   return (
-    <div
-      children={children}
-      className={`flex ${Gap[gap]} ${Align[align]} ${Justify[justify]}`}
-    />
+    <div className={`flex ${Gap[gap]} ${Align[align]} ${Justify[justify]}`}>
+      {children}
+    </div>
   );
 }

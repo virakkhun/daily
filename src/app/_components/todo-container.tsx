@@ -8,7 +8,7 @@ type Props = Readonly<{
 
 export function TodoContainer(props: Props) {
   return (
-    <div className="flex flex-col gap-6 p-8 rounded-lg bg-gray-100">
+    <div className="min-w-96 flex flex-col gap-6 p-8 rounded-lg bg-gray-100">
       <h1 className="text-3xl font-bold">Todo</h1>
       {props.children}
     </div>

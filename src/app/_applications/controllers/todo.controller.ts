@@ -9,4 +9,8 @@ export const todoController = {
   createTodo: (s: SupabaseClient, dto: TodoDTO) => {
     return todoAPI.createTodo(s, dto);
   },
+  update: (s: SupabaseClient, dto: TodoDTO) => {
+    return todoAPI.update(s, dto);
+  },
+  delete: (s: SupabaseClient, id: number) => todoAPI.delete(s, id),
 };

@@ -4,10 +4,11 @@ import { Input } from "@/core/components/input";
 import { CreateTodoTitle } from "./_components/create-todo-title";
 import { TodoDTO } from "../_infrastructure/dto/todo.dto";
 import { todoController } from "../_applications/controllers/todo.controller";
-import { supabase } from "@/core/applications/services/supabase";
+import { createClient } from "@/core/applications/services/supabase";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { Metadata } from "next";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "Todo App | Create task",
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
 export default async function CreateTodoPage() {
   async function createTodo(form: FormData) {
     "use server";
+    const supabase = createClient(cookies());
 
     const todo: TodoDTO = {
       title: form.get("title") as string,

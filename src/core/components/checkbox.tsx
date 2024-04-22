@@ -1,18 +1,19 @@
 "use client";
 
+import React from "react";
 import { Icon } from "./icon";
 
-type Props = {
+type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   check: boolean;
 };
 
-export function CheckBox(props: Props) {
+export function CheckBox({ check, ...rest }: Props) {
   const defaultClass = "w-5 h-5 border-gray-400 border-2 rounded-full";
-  const isCheck = props.check && "flex justify-center items-center bg-gray-400";
+  const isCheck = check && "flex justify-center items-center bg-gray-400";
 
   return (
-    <div className={`${isCheck} ${defaultClass}`}>
-      {props.check && <Icon.Tick className="w-3 h-3 text-white" />}
-    </div>
+    <button {...rest} type="button" className={`${isCheck} ${defaultClass}`}>
+      {check && <Icon.Tick className="w-3 h-3 text-white" />}
+    </button>
   );
 }
