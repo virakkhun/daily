@@ -34,7 +34,7 @@ export default async function CreateTodoPage() {
 
   return (
     <CreateTodoContainer>
-      <form action={createTodo} className="w-4/12">
+      <form action={createTodo} className="lg:w-1/4 md:w-1/2 w-4/5">
         <div className="bg-gray-100 p-4 rounded-tr-md rounded-tl-md">
           <CreateTodoTitle />
           <Input type="text" name="title" placeholder="task" required />

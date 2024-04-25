@@ -1,5 +1,6 @@
 import { Button } from "@/core/components/button";
 import { Flex } from "@/core/components/flex";
+import { SubmitButton } from "@/core/components/submit-button";
 import Link from "next/link";
 
 export function CreateTodoAction() {
@@ -8,12 +9,10 @@ export function CreateTodoAction() {
       <Flex justify="end">
         <Link href="/">
           <Button type="button" intent="secondary" padding="sm" size="fit">
-            Cancel
+            cancel
           </Button>
         </Link>
-        <Button type="submit" size="fit" padding="sm">
-          Submit
-        </Button>
+        <SubmitButton size="fit">submit</SubmitButton>
       </Flex>
     </div>
   );
