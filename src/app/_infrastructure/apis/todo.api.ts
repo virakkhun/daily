@@ -2,16 +2,14 @@ import { TodoDTO } from "../dto/todo.dto";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export const todoAPI = {
-  getTodos: (s: SupabaseClient) => {
+  getTodos: (s: SupabaseClient, userId: string) => {
     return s
       .from("todos")
-      .select<"id,title,status", TodoDTO>("id,title,status")
-      .eq("profile_id", "8ad1366e-4cab-4e8f-87db-126fe278a3c7");
+      .select<"id,title,status,priority", TodoDTO>("id,title,status,priority")
+      .eq("profile_id", userId);
   },
-  createTodo: (s: SupabaseClient, dto: TodoDTO) => {
-    return s
-      .from("todos")
-      .insert({ ...dto, profile_id: "8ad1366e-4cab-4e8f-87db-126fe278a3c7" });
+  createTodo: (s: SupabaseClient, dto: TodoDTO, userId: string) => {
+    return s.from("todos").insert({ ...dto, profile_id: userId });
   },
   update: (s: SupabaseClient, dto: TodoDTO) => {
     return s.from("todos").update(dto).eq("id", `${dto.id}`);

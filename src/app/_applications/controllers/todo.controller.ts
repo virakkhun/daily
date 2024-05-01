@@ -3,11 +3,17 @@ import { TodoDTO } from "@/app/_infrastructure/dto/todo.dto";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export const todoController = {
-  getTodos: (s: SupabaseClient) => {
-    return todoAPI.getTodos(s);
+  getTodos: async (s: SupabaseClient) => {
+    const {
+      data: { user },
+    } = await s.auth.getUser();
+    return todoAPI.getTodos(s, user?.id!);
   },
-  createTodo: (s: SupabaseClient, dto: TodoDTO) => {
-    return todoAPI.createTodo(s, dto);
+  createTodo: async (s: SupabaseClient, dto: TodoDTO) => {
+    const {
+      data: { user },
+    } = await s.auth.getUser();
+    return todoAPI.createTodo(s, dto, user?.id!);
   },
   update: (s: SupabaseClient, dto: TodoDTO) => {
     return todoAPI.update(s, dto);

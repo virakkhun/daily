@@ -6,8 +6,9 @@ import { createClient } from "@/core/applications/services/supabase";
 import { AuthController } from "./_applications/controllers/auth.controller";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import { Suspense } from "react";
 
-export default async function Page() {
+export default function Page() {
   async function action(f: FormData) {
     "use server";
 
@@ -42,7 +43,9 @@ export default async function Page() {
 
   return (
     <form action={action}>
-      <AuthContainer />
+      <Suspense>
+        <AuthContainer />
+      </Suspense>
     </form>
   );
 }

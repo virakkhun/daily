@@ -1,24 +1,31 @@
-import { todoController } from "./_applications/controllers/todo.controller";
 import { TodoContainer } from "./_components/todo-container";
 import React, { Suspense } from "react";
-import { TodoList } from "./_components/todo-list";
+import { AsyncTodoList } from "./_components/todo-list";
 import { Button } from "@/core/components/button";
 import Link from "next/link";
-import { createClient } from "@/core/applications/services/supabase";
-import { cookies } from "next/headers";
 import { Header } from "./_components/header";
+import { cookies } from "next/headers";
+import { createClient } from "@/core/applications/services/supabase";
+import { todoController } from "./_applications/controllers/todo.controller";
+import { AsyncLoggedInUserProfile } from "./_components/logged-in-user-profile";
+import { ProfileController } from "./profile/_applications/controllers/profile.controller";
 
 export default async function Home() {
   const supabase = createClient(cookies());
-  const { data: todos } = await todoController.getTodos(supabase);
+  const resourse = todoController.getTodos(supabase);
+  const loggedInProfile = ProfileController.get(supabase);
 
   return (
     <React.Fragment>
-      <Header />
+      <Header>
+        <Suspense fallback={<p>loading...</p>}>
+          <AsyncLoggedInUserProfile profile={loggedInProfile} />
+        </Suspense>
+      </Header>
       <main className="container lg:px-36 md:px-16 px-4 mt-8 w-full flex justify-start items-center">
         <TodoContainer>
           <Suspense fallback="loading...">
-            <TodoList todos={todos} />
+            <AsyncTodoList todos={resourse} />
           </Suspense>
 
           <Link href="/create-todo">

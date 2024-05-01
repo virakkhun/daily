@@ -5,14 +5,16 @@ import { Todo } from "../_domains/models/todo";
 import { TodoItem } from "./todo-item";
 import { todoController } from "../_applications/controllers/todo.controller";
 import { useRouter } from "next/navigation";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
 
 type Props = {
-  todos: Todo[] | null;
+  todos: Promise<PostgrestSingleResponse<Todo[]>>;
 };
 
-export function TodoList(props: Props) {
+export async function AsyncTodoList(props: Props) {
   const supabase = createClient();
   const router = useRouter();
+  const { data: todos } = await props.todos;
 
   async function update(todo: Todo) {
     const { error } = await todoController.update(supabase, {
@@ -31,9 +33,9 @@ export function TodoList(props: Props) {
     router.refresh();
   }
 
-  return !!props.todos && props.todos.length > 0 ? (
+  return !!todos && todos.length > 0 ? (
     <div className="flex flex-col gap-2">
-      {props.todos.map((todo) => (
+      {todos.map((todo) => (
         <TodoItem
           key={todo.id}
           {...todo}
