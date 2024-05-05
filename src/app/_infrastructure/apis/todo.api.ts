@@ -6,7 +6,8 @@ export const todoAPI = {
     return s
       .from("todos")
       .select<"id,title,status,priority", TodoDTO>("id,title,status,priority")
-      .eq("profile_id", userId);
+      .eq("profile_id", userId)
+      .order("created_at", { ascending: false });
   },
   createTodo: (s: SupabaseClient, dto: TodoDTO, userId: string) => {
     return s.from("todos").insert({ ...dto, profile_id: userId });

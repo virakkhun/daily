@@ -14,7 +14,7 @@ export default async function Page() {
   return (
     <ProfileContainer>
       <Flex direction="col">
-        <Suspense fallback={<p>loading...</p>}>
+        <Suspense fallback="loading...">
           <RandomAvatar size="md" name={firstName} />
           <h1>{firstName}</h1>
         </Suspense>
