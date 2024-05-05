@@ -8,7 +8,7 @@ const Intent = {
   danger: "text-white bg-red-400",
 };
 const Padding = {
-  sm: "py-1 px-3",
+  sm: "py-1 px-3 text-sm",
   md: "py-2 px-4",
   lg: "py-3 px-5",
 };
@@ -22,20 +22,27 @@ type Props = React.ButtonHTMLAttributes<HTMLButtonElement> &
     intent: keyof typeof Intent;
     padding: keyof typeof Padding;
     size: keyof typeof Size;
+    loading: boolean;
   }>;
 
 export function Button({
   intent = "primary",
   padding = "md",
   size = "fit",
+  loading = false,
   className,
+  children,
   ...restProps
 }: Props) {
+  const opacity = (restProps?.disabled || loading) && "opacity-50";
   const styleProps = `${Intent[intent]} ${Padding[padding]} ${Size[size]}`;
   return (
     <button
       {...restProps}
-      className={`${style} ${styleProps} ${className} ${restProps.disabled && "opacity-50"}`}
-    />
+      disabled={loading || restProps.disabled}
+      className={`${style} ${styleProps} ${className} ${opacity}`}
+    >
+      {loading ? "loading..." : children}
+    </button>
   );
 }

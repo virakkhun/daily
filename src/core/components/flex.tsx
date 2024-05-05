@@ -15,16 +15,22 @@ const Align = {
 };
 
 const Justify = {
-  between: "justity-between",
+  between: "justify-between",
   center: "justify-center",
   start: "justify-start",
   end: "justify-end",
+};
+
+const Direction = {
+  col: "flex-col",
+  row: "flex-row",
 };
 
 type Props = {
   gap?: keyof typeof Gap;
   align?: keyof typeof Align;
   justify?: keyof typeof Justify;
+  direction?: keyof typeof Direction;
   children: ReactNode;
 };
 
@@ -32,10 +38,13 @@ export function Flex({
   gap = "sm",
   align = "center",
   justify = "start",
+  direction = "row",
   children,
 }: Props) {
   return (
-    <div className={`flex ${Gap[gap]} ${Align[align]} ${Justify[justify]}`}>
+    <div
+      className={`flex ${Gap[gap]} ${Direction[direction]} ${Align[align]} ${Justify[justify]}`}
+    >
       {children}
     </div>
   );
