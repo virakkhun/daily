@@ -1,5 +1,5 @@
 import { Button } from "@/core/components/button";
-import { RandomAvatar } from "@/core/components/random-avatar";
+import { Avatar } from "@/core/components/avatar";
 import Link from "next/link";
 import { Profile } from "../profile/_applications/models/profile";
 
@@ -12,7 +12,7 @@ export async function AsyncLoggedInUserProfile(props: Props) {
 
   return !!profile?.firstName ? (
     <Link href="/profile">
-      <RandomAvatar name={profile.firstName} />
+      <Avatar name={profile.firstName} />
     </Link>
   ) : (
     <Link href="/auth">

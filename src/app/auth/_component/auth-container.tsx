@@ -15,7 +15,7 @@ export function AuthContainer() {
   const path = `/auth?${AUTH_QUERY_KEY}=${isSignUp ? AUTH_QUERY.LOGIN : AUTH_QUERY.SIGN_UP}`;
 
   return (
-    <div className="w-full h-svh flex justify-center items-center">
+    <div className="h-svh flex justify-center items-center">
       <div className="md:w-1/4 w-4/5">
         <Flex direction="col" gap="lg">
           <AuthContainerHeader />

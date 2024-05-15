@@ -1,3 +1,4 @@
+import { ProfileController } from "@/app/profile/_applications/controllers/profile.controller";
 import { createClient } from "@/core/applications/services/supabase";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
@@ -9,7 +10,8 @@ export async function GET(req: NextRequest) {
 
   if (code) {
     await supabase.auth.exchangeCodeForSession(code);
+    await ProfileController.create(supabase);
   }
 
-  return NextResponse.redirect(new URL("/create-todo", req.url));
+  return NextResponse.redirect(new URL("/profile", req.url));
 }

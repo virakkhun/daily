@@ -6,6 +6,7 @@ const Intent = {
     "text-white bg-blue-400 hover:bg-blue-500 focus:ring focus:ring-gray-200",
   secondary: "text-black bg-gray-300",
   danger: "text-white bg-red-400",
+  transparent: "bg-transparent",
 };
 const Padding = {
   sm: "py-1 px-3 text-sm",
