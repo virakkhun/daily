@@ -5,15 +5,40 @@ import { Todo } from "../_domains/models/todo";
 import { CheckBox } from "@/core/components/checkbox";
 import { Action } from "@/core/components/action";
 import { TASK_PRIORITY_EMOJI_MAP } from "../_domains/constants/task-priority-emoji-map";
+import { Flex } from "@/core/components/flex";
+import { useRouter } from "next/navigation";
+import { todoController } from "../_applications/controllers/todo.controller";
+import { createClient } from "@/core/applications/services/supabase";
 
-type Props = Todo & { onToggle: () => void; onDelete: () => void };
+type Props = Todo;
 
 export function TodoItem(props: Props) {
+  const supabase = createClient();
+  const router = useRouter();
+  async function update(todo: Todo) {
+    const { error } = await todoController.update(supabase, {
+      ...todo,
+      status: !todo.status,
+    });
+
+    if (error?.message) throw new Error(error.message);
+    router.refresh();
+  }
+
+  async function remove(id: number) {
+    const { error } = await todoController.delete(supabase, id);
+
+    if (error?.message) throw new Error(error.message);
+    router.refresh();
+  }
+
   return (
     <div className="flex justify-between items-center gap-10">
       <div className="flex items-center gap-3 w-4/5">
         <div className="w-6">
-          <CheckBox check={props.status} onClick={props.onToggle} />
+          <Flex>
+            <CheckBox check={props.status} onClick={() => update(props)} />
+          </Flex>
         </div>
         <p
           title={props.title}
@@ -24,7 +49,7 @@ export function TodoItem(props: Props) {
         <span>{TASK_PRIORITY_EMOJI_MAP[props.priority]}</span>
       </div>
 
-      <Action onClick={props.onDelete}>
+      <Action onClick={() => remove(props.id!)}>
         <Icon.X className="w-4 h-4 text-gray-400" />
       </Action>
     </div>

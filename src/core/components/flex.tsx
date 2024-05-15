@@ -26,12 +26,19 @@ const Direction = {
   row: "flex-row",
 };
 
+const Width = {
+  full: "w-full",
+  fit: "w-fit",
+};
+
 type Props = {
   gap?: keyof typeof Gap;
   align?: keyof typeof Align;
   justify?: keyof typeof Justify;
   direction?: keyof typeof Direction;
   children: ReactNode;
+  width?: keyof typeof Width;
+  className?: string;
 };
 
 export function Flex({
@@ -39,11 +46,13 @@ export function Flex({
   align = "center",
   justify = "start",
   direction = "row",
+  width = "full",
+  className,
   children,
 }: Props) {
   return (
     <div
-      className={`flex ${Gap[gap]} ${Direction[direction]} ${Align[align]} ${Justify[justify]}`}
+      className={`${className} flex ${Width[width]} ${Gap[gap]} ${Direction[direction]} ${Align[align]} ${Justify[justify]}`}
     >
       {children}
     </div>

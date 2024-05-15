@@ -10,7 +10,7 @@ export function CreateTodoFormField() {
   return (
     <Flex direction="col" justify="start" align="start" gap="md">
       <Input type="text" name="title" placeholder="task" required />
-      <Flex>
+      <Flex width="fit" gap="md">
         <InputRadio name="priority" anchor="high" value={TaskPriority.HIGH}>
           {TASK_PRIORITY_EMOJI_MAP[TaskPriority.HIGH]}
         </InputRadio>
