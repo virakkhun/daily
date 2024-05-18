@@ -26,6 +26,7 @@ export function CreateTodoDialog() {
 
     if (!res.ok) throw new Error("something went wrong");
 
+    close();
     router.refresh();
   }
 
