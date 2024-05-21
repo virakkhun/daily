@@ -1,5 +1,6 @@
 "use client";
 
+import { timeout } from "@/core/applications/utils/timeout.util";
 import { Button } from "@/core/components/button";
 import {
   Dialog,
@@ -11,9 +12,8 @@ import {
 import { Flex } from "@/core/components/flex";
 import { Input } from "@/core/components/input";
 import { SubmitButton } from "@/core/components/submit-button";
-import { profile } from "console";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useRef } from "react";
 
 type Props = {
   name: string;
@@ -22,6 +22,7 @@ type Props = {
 
 export function EditUsernameDialog(props: Props) {
   const { ref, close, open } = useDialogRef();
+  const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   async function update(fd: FormData) {
@@ -42,9 +43,15 @@ export function EditUsernameDialog(props: Props) {
     return props.name === name;
   }
 
+  async function openDialog() {
+    open();
+    await timeout(10);
+    inputRef.current?.focus();
+  }
+
   return (
     <React.Fragment>
-      <Button intent="transparent" onClick={open}>
+      <Button intent="transparent" onClick={openDialog}>
         {props.children}
       </Button>
 
@@ -54,6 +61,7 @@ export function EditUsernameDialog(props: Props) {
           <DialogContent>
             <form action={update}>
               <Input
+                ref={inputRef}
                 type="text"
                 name="name"
                 placeholder="name"

@@ -1,15 +1,14 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "./core/applications/services/supbase.middleware";
-import { createClient } from "./core/applications/services/supabase";
-import { cookies } from "next/headers";
 import {
   AUTH_QUERY,
   AUTH_QUERY_KEY,
 } from "./app/auth/_domains/constants/auth-query";
+import { supbaseServerClient } from "./core/applications/services/supabase";
 
 export async function middleware(request: NextRequest) {
   await updateSession(request);
-  const supbase = createClient(cookies());
+  const supbase = supbaseServerClient();
   const {
     data: { user },
   } = await supbase.auth.getUser();

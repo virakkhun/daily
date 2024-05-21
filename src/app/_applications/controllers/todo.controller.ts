@@ -2,7 +2,7 @@ import { todoAPI } from "@/app/_infrastructure/apis/todo.api";
 import { TodoDTO } from "@/app/_infrastructure/dto/todo.dto";
 import { SupabaseClient } from "@supabase/supabase-js";
 
-export const todoController = {
+export const TodoController = {
   getTodos: async (s: SupabaseClient) => {
     const {
       data: { user },
