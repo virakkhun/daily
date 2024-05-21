@@ -1,5 +1,7 @@
 "use client";
 
+import { RefObject, forwardRef, useEffect } from "react";
+
 const style = "rounded-md";
 
 const Padding = {
@@ -13,14 +15,23 @@ type Props = React.InputHTMLAttributes<HTMLInputElement> &
     padding: keyof typeof Padding;
   }>;
 
-export function Input({ padding = "md", className, ...restProps }: Props) {
-  const defaultStyle =
-    "w-full text-gray-900 bg-gray-100 outline outline-gray-200 focus:ring focus:ring-offset-2 focus:ring-gray-100";
-  const styleProps = `${Padding[padding]} ${defaultStyle}`;
-  return (
-    <input
-      {...restProps}
-      className={`${style} ${styleProps} ${className} ${restProps.disabled && "opacity-50"}`}
-    />
-  );
+export const Input = forwardRef<HTMLInputElement, Props>(
+  ({ padding = "md", className, ...restProps }, ref) => {
+    const defaultStyle =
+      "w-full text-gray-900 bg-gray-100 outline outline-gray-200 focus:ring focus:ring-offset-2 focus:ring-gray-100";
+    const styleProps = `${Padding[padding]} ${defaultStyle}`;
+    return (
+      <input
+        {...restProps}
+        ref={ref}
+        className={`${style} ${styleProps} ${className} ${restProps.disabled && "opacity-50"}`}
+      />
+    );
+  },
+);
+
+export function useInputFocus(ref: RefObject<HTMLInputElement>) {
+  useEffect(() => {
+    ref.current?.focus();
+  });
 }
