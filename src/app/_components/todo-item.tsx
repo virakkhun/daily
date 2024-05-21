@@ -7,15 +7,15 @@ import { Action } from "@/core/components/action";
 import { TASK_PRIORITY_EMOJI_MAP } from "../_domains/constants/task-priority-emoji-map";
 import { Flex } from "@/core/components/flex";
 import { useRouter } from "next/navigation";
-import { todoController } from "../_applications/controllers/todo.controller";
 import { supabaseBrowserClient } from "@/core/applications/services/supabase-browser";
+import { TodoController } from "../_applications/controllers/todo.controller";
 
 export function TodoItem(props: Todo) {
   const supabase = supabaseBrowserClient();
   const router = useRouter();
 
   async function update(todo: Todo) {
-    const { error } = await todoController.update(supabase, {
+    const { error } = await TodoController.update(supabase, {
       ...todo,
       status: !todo.status,
     });
@@ -25,7 +25,7 @@ export function TodoItem(props: Todo) {
   }
 
   async function remove(id: number) {
-    const { error } = await todoController.delete(supabase, id);
+    const { error } = await TodoController.delete(supabase, id);
 
     if (error?.message) throw new Error(error.message);
     router.refresh();

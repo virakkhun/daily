@@ -19,7 +19,12 @@ export function CreateTodoFormField() {
         <InputRadio name="priority" anchor="high" value={TaskPriority.HIGH}>
           {TASK_PRIORITY_EMOJI_MAP[TaskPriority.HIGH]}
         </InputRadio>
-        <InputRadio name="priority" anchor="medium" value={TaskPriority.MEDIUM}>
+        <InputRadio
+          name="priority"
+          checked
+          anchor="medium"
+          value={TaskPriority.MEDIUM}
+        >
           {TASK_PRIORITY_EMOJI_MAP[TaskPriority.MEDIUM]}
         </InputRadio>
         <InputRadio name="priority" anchor="low" value={TaskPriority.LOW}>
