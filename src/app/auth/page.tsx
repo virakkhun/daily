@@ -1,19 +1,17 @@
-import { cookies } from "next/headers";
 import { AuthContainer } from "./_component/auth-container";
 import { AuthForm } from "./_applications/models/auth-form";
 import { AUTH_QUERY } from "./_domains/constants/auth-query";
-import { createClient } from "@/core/applications/services/supabase";
 import { AuthController } from "./_applications/controllers/auth.controller";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { Suspense } from "react";
+import { supbaseServerClient } from "@/core/applications/services/supabase";
 
 export default function Page() {
   async function action(f: FormData) {
     "use server";
 
-    const cookie = cookies();
-    const supabase = createClient(cookie);
+    const supabase = supbaseServerClient();
 
     const data: AuthForm = {
       email: f.get("email") as string,

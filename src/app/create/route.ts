@@ -1,11 +1,10 @@
-import { createClient } from "@/core/applications/services/supabase";
+import { supbaseServerClient } from "@/core/applications/services/supabase";
 import { TaskPriority } from "../_domains/models/task-priority.enum";
 import { TodoDTO } from "../_infrastructure/dto/todo.dto";
 import { todoController } from "../_applications/controllers/todo.controller";
-import { cookies } from "next/headers";
 
 export async function POST(next: Request) {
-  const supabase = createClient(cookies());
+  const supabase = supbaseServerClient();
   const form = await next.formData();
 
   const todo = {

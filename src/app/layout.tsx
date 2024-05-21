@@ -5,9 +5,8 @@ import { Header } from "./_components/header";
 import { Suspense } from "react";
 import { AsyncLoggedInUserProfile } from "./_components/logged-in-user-profile";
 import { ProfileController } from "./profile/_applications/controllers/profile.controller";
-import { createClient } from "@/core/applications/services/supabase";
-import { cookies } from "next/headers";
 import { Loading } from "./_components/loading";
+import { supbaseServerClient } from "@/core/applications/services/supabase";
 
 const inter = Space_Grotesk({ subsets: ["latin"], display: "swap" });
 
@@ -23,7 +22,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = createClient(cookies());
+  const supabase = supbaseServerClient();
   const loggedInProfile = ProfileController.get(supabase);
 
   return (

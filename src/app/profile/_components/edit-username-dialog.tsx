@@ -10,7 +10,7 @@ import {
   useDialogRef,
 } from "@/core/components/dialog";
 import { Flex } from "@/core/components/flex";
-import { Input, useInputFocus } from "@/core/components/input";
+import { Input } from "@/core/components/input";
 import { SubmitButton } from "@/core/components/submit-button";
 import { useRouter } from "next/navigation";
 import React, { useRef } from "react";

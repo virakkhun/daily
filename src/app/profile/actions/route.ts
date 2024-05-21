@@ -1,11 +1,10 @@
-import { createClient } from "@/core/applications/services/supabase";
-import { cookies } from "next/headers";
+import { supbaseServerClient } from "@/core/applications/services/supabase";
 import { NextRequest, NextResponse } from "next/server";
 import { ProfileDTO } from "../_infrastructure/dto/profile.dto";
 import { ProfileController } from "../_applications/controllers/profile.controller";
 
 export async function POST(next: NextRequest) {
-  const supabase = createClient(cookies());
+  const supabase = supbaseServerClient();
   const fd = await next.formData();
   const dto: Partial<ProfileDTO> = {
     first_name: fd.get("name") as string,

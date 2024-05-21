@@ -8,13 +8,12 @@ import { TASK_PRIORITY_EMOJI_MAP } from "../_domains/constants/task-priority-emo
 import { Flex } from "@/core/components/flex";
 import { useRouter } from "next/navigation";
 import { todoController } from "../_applications/controllers/todo.controller";
-import { createClient } from "@/core/applications/services/supabase";
+import { supabaseBrowserClient } from "@/core/applications/services/supabase-browser";
 
-type Props = Todo;
-
-export function TodoItem(props: Props) {
-  const supabase = createClient();
+export function TodoItem(props: Todo) {
+  const supabase = supabaseBrowserClient();
   const router = useRouter();
+
   async function update(todo: Todo) {
     const { error } = await todoController.update(supabase, {
       ...todo,

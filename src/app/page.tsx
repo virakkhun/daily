@@ -1,14 +1,13 @@
 import { TodoContainer } from "./_components/todo-container";
 import React, { Suspense } from "react";
 import { AsyncTodoList } from "./_components/todo-list";
-import { cookies } from "next/headers";
-import { createClient } from "@/core/applications/services/supabase";
+import { supbaseServerClient } from "@/core/applications/services/supabase";
 import { todoController } from "./_applications/controllers/todo.controller";
 import { Flex } from "@/core/components/flex";
 import { TodoListFallback } from "./_components/todo-list-fallback";
 
 export default async function Home() {
-  const supabase = createClient(cookies());
+  const supabase = supbaseServerClient();
   const resourse = todoController.getTodos(supabase);
 
   return (
