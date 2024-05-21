@@ -35,3 +35,5 @@ export function useInputFocus(ref: RefObject<HTMLInputElement>) {
     ref.current?.focus();
   });
 }
+
+Input.displayName = "daily-input-custom-component";
