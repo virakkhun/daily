@@ -14,7 +14,19 @@ export const metadata: Metadata = {
   title: "Todo App",
   description:
     "Managing your tasks for the next hour, or today or in the next week",
-  keywords: "todo app, small tasks, manage task, daily task",
+  keywords:
+    "todo app, small tasks, manage task, daily task, yourdaily, your daily, your daily task",
+  referrer: "no-referrer",
+  openGraph: {
+    title: "Todo App",
+    description:
+      "Managing your tasks for the next hour, or today or in the next week",
+    siteName: "yourdaily | Todo App",
+    locale: "en-US",
+  },
+  creator: "Virak Khun",
+  category: "web application",
+  applicationName: "yourdaily | Todo App",
 };
 
 export default function RootLayout({
