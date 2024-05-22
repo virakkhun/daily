@@ -1,6 +1,6 @@
 import { Flex } from "@/core/components/flex";
-import { Weather } from "../_domains/models/weather";
 import { Loading } from "./loading";
+import { Weather } from "../_domains/models/weather";
 
 type Props = {
   weather: Promise<Weather>;
@@ -8,9 +8,10 @@ type Props = {
 
 export async function AsyncWeather(props: Props) {
   const { temp } = await props.weather;
+
   return (
     <Flex align="center" justify="center">
-      <span>{temp}</span> &#176;
+      &#176;<span className="font-semibold">{temp}</span>
     </Flex>
   );
 }
@@ -18,7 +19,7 @@ export async function AsyncWeather(props: Props) {
 export function WeatherFallback() {
   return (
     <Flex align="center" justify="center">
-      <Loading w="w-4" h="h-4" />
+      <Loading w="w-10" h="h-4" />
     </Flex>
   );
 }
