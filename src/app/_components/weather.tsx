@@ -7,11 +7,11 @@ type Props = {
 };
 
 export async function AsyncWeather(props: Props) {
-  const { temp } = await props.weather;
+  const weather = await props.weather;
 
   return (
     <Flex align="center" justify="center">
-      &#176;<span className="font-semibold">{temp}</span>
+      &#176;<span className="font-semibold">{weather?.temp ?? "0"}</span>
     </Flex>
   );
 }
