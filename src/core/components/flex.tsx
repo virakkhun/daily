@@ -52,7 +52,7 @@ export function Flex({
 }: Props) {
   return (
     <div
-      className={`${className} flex ${Width[width]} ${Gap[gap]} ${Direction[direction]} ${Align[align]} ${Justify[justify]}`}
+      className={`${className} flex h-full ${Width[width]} ${Gap[gap]} ${Direction[direction]} ${Align[align]} ${Justify[justify]}`}
     >
       {children}
     </div>
