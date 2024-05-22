@@ -19,15 +19,19 @@ export default async function Home() {
   return (
     <React.Fragment>
       <Flex gap="lg" justify="start" align="start" direction="col">
-        <Flex>
-          <Suspense fallback={<WeatherFallback />}>
-            <AsyncWeather weather={weather} />
-          </Suspense>
-          <div className="w-0.5 h-full bg-gray-500/20 rounded-lg" />
-          <Suspense fallback={<QuoteFallback />}>
-            <Quote qoute={quote} />
-          </Suspense>
-        </Flex>
+        <div className="p-4 flex items-center gap-4 w-full mt-4 bg-gray-100 rounded-md">
+          <div className="w-fit">
+            <Suspense fallback={<WeatherFallback />}>
+              <AsyncWeather weather={weather} />
+            </Suspense>
+          </div>
+          <div className="w-0.5 h-8 bg-gray-300 rounded-md" />
+          <div className="w-full">
+            <Suspense fallback={<QuoteFallback />}>
+              <Quote qoute={quote} />
+            </Suspense>
+          </div>
+        </div>
         <TodoContainer>
           <Suspense fallback={<TodoListFallback />}>
             <AsyncTodoList todos={resourse} />
